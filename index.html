@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#111827,#1f2937,#374151);
+overflow:hidden;
+}
+
+.container{
+width:390px;
+height:580px;
+position:relative;
+overflow:hidden;
+border-radius:25px;
+box-shadow:0 25px 60px rgba(0,0,0,0.35);
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+}
+
+.page{
+position:absolute;
+width:100%;
+height:100%;
+padding:35px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+transition:1s ease;
+left:100%;
+}
+
+.page.active{
+left:0;
+}
+
+.page.prev{
+left:-100%;
+}
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:44px;
+color:#ff8fb1;
+margin-bottom:20px;
+}
+
+p{
+font-size:15px;
+line-height:1.9;
+color:#f3f4f6;
+}
+
+button{
+margin-top:25px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:#ff4d88;
+color:white;
+font-size:14px;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(255,77,136,0.3);
+}
+
+iframe{
+margin-top:20px;
+border-radius:15px;
+}
+
+.open-btn{
+position:absolute;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+z-index:10;
+}
+
+.heart{
+position:absolute;
+font-size:18px;
+color:#ff8fb1;
+animation:float 6s linear infinite;
+opacity:0.4;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:0.6;
+}
+100%{
+transform:translateY(-700px);
+opacity:0;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="page active" id="page1">
+<h1>21 April ❤️</h1>
+<p>
+One year completed since we first started talking ✨
+</p>
+<button onclick="nextPage(1)">Open</button>
+</div>
+
+<div class="page" id="page2">
+<h1>For You</h1>
+<p>
+Aaj exactly ek saal ho gaya, jab pehli baar aapse baat karni shuru ki thi...  
+aur honestly pata hi nahi chala itna time kaise nikal gaya.  
+Kabhi kabhi lagta hai jitni excitement mujhe aapse baat karne mein hoti hai,  
+agar uska thoda sa hissa bhi aapko feel hota toh aur acha lagta...  
+Par phir bhi, aapka reply aana mere liye kaafi hota hai,  
+kyunki kuch conversations bina wajah bhi special ban jaati hain ❤️
+</p>
+<button onclick="nextPage(2)">Next</button>
+</div>
+
+<div class="page" id="page3">
+<h1>Just This Song 🎵</h1>
+
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/track/3be9ACTxtcL6Zm4vJRUiPG"
+width="100%" height="152"
+frameBorder="0"
+allowfullscreen=""
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+
+</div>
+
+</div>
+
+<script>
+function nextPage(step){
+if(step===1){
+document.getElementById('page1').classList.remove('active');
+document.getElementById('page1').classList.add('prev');
+document.getElementById('page2').classList.add('active');
+}
+if(step===2){
+document.getElementById('page2').classList.remove('active');
+document.getElementById('page2').classList.add('prev');
+document.getElementById('page3').classList.add('active');
+}
+}
+
+function createHeart(){
+let heart=document.createElement('div');
+heart.classList.add('heart');
+heart.innerHTML='❤';
+heart.style.left=Math.random()*100+'vw';
+heart.style.top='100vh';
+heart.style.fontSize=(Math.random()*20+10)+'px';
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+}
+
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>
